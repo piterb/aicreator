@@ -7,55 +7,71 @@
   <meta name="description" content="AI Video Creator – Foundation Kit" />
   <style>
     :root {
-      --bg: #0b0d12;
-      --panel: #111422;
-      --text: #e9ecf1;
-      --muted: #a6accd;
-      --accent: #7c8cff;
-      --border: #1b2040;
+      --bg: #f6f1e9;
+      --panel: #ffffff;
+      --text: #1c1b19;
+      --muted: #6b5f53;
+      --accent: #e46f3a;
+      --accent-2: #2f6f68;
+      --border: rgba(60, 50, 40, 0.14);
+      --ring: rgba(228, 111, 58, 0.2);
     }
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: "Work Sans", "Segoe UI", sans-serif; }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    .wrap { max-width: 760px; margin: 0 auto; padding: 56px 20px 80px; }
-    .card { background: linear-gradient(180deg, rgba(124,140,255,.06), rgba(124,140,255,0)); border: 1px solid var(--border); border-radius: 18px; padding: 28px; }
-    .spacer { height: 28px; }
-    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 32px 0; }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(800px 500px at 20% -10%, rgba(228, 111, 58, 0.18), transparent 60%),
+        radial-gradient(700px 400px at 95% 10%, rgba(47, 111, 104, 0.18), transparent 60%),
+        repeating-linear-gradient(120deg, rgba(60, 50, 40, 0.04) 0, rgba(60, 50, 40, 0.04) 1px, transparent 1px, transparent 36px);
+      z-index: -1;
+      opacity: 0.9;
+    }
 
-    h1 { font-size: 42px; line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 10px; }
-    h2 { font-size: 26px; margin: 0 0 8px; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 56px 20px 80px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 22px; padding: 28px; box-shadow: 0 18px 50px rgba(60, 50, 40, 0.08); }
+    .spacer { height: 28px; }
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(60, 50, 40, 0.18), transparent); margin: 34px 0; }
+
+    h1, h2 { font-family: "Fraunces", "Georgia", serif; }
+    h1 { font-size: 46px; line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 12px; }
+    h2 { font-size: 28px; margin: 0 0 10px; }
     h3 { font-size: 18px; margin: 0 0 6px; color: var(--muted); font-weight: 600; }
     .panel-head h3 { color: var(--text); }
     p { margin: 0 0 10px; color: var(--text); }
     .muted { color: var(--muted); }
 
-    .hero p { font-size: 16px; }
+    .hero p { font-size: 17px; }
     .personal { font-style: italic; opacity: .95; }
 
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--panel); color: var(--text); cursor: pointer; }
-    .btn:hover { border-color: var(--accent); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--border); background: var(--panel); color: var(--text); cursor: pointer; font-weight: 600; }
+    .btn:hover { border-color: var(--accent); box-shadow: 0 0 0 3px var(--ring); }
     .btn-ghost { background: transparent; }
+    .btn-accent { background: var(--accent); color: #fff; border-color: transparent; }
 
     .section { padding: 18px 0; }
 
-    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
-    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+    @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
 
-    .tile { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 14px; text-align: left; }
+    .tile { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 16px; text-align: left; transition: transform .2s ease, box-shadow .2s ease; }
     .tile strong { display: block; margin-bottom: 6px; color: var(--text); font-weight: 700; }
     .tile-btn { width: 100%; }
-    .tile-btn:hover { border-color: var(--accent); }
-    .tile-btn:focus { outline: 2px solid rgba(124,140,255,.45); outline-offset: 2px; }
+    .tile-btn:hover { border-color: var(--accent); box-shadow: 0 10px 24px rgba(60, 50, 40, 0.1); transform: translateY(-2px); }
+    .tile-btn:focus { outline: 2px solid var(--ring); outline-offset: 2px; }
 
-    .panel { display: none; background: rgba(17,20,34,.65); border: 1px solid var(--border); border-radius: 16px; padding: 14px; }
+    .panel { display: none; background: rgba(255, 255, 255, .95); border: 1px solid var(--border); border-radius: 16px; padding: 16px; }
     .panel.show { display: block; }
     .panel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
     .panel-body { margin-top: 10px; display: grid; gap: 10px; }
 
     .prompt {
-      background: var(--panel);
+      background: #fff7f2;
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 12px;
@@ -66,53 +82,107 @@
     .copy { margin-left: auto; }
 
     footer { text-align: center; margin-top: 56px; color: var(--muted); }
+
+    .hero-card { padding: 32px; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: center; }
+    .hero-art { background: #f0e7da; border: 1px solid var(--border); border-radius: 18px; padding: 18px; display: grid; gap: 12px; }
+    .hero-art img { width: 100%; border-radius: 14px; display: block; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 20px; }
+    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: #fff; border: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+    .icon { font-size: 16px; }
+
+    .section-title { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .section-title .icon-dot { width: 10px; height: 10px; border-radius: 999px; background: var(--accent-2); }
+
+    .links-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .link-card { border: 1px solid var(--border); border-radius: 18px; padding: 18px; background: #fff; display: grid; gap: 10px; min-height: 170px; }
+    .link-card .icon-wrap { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: #f7efe5; font-size: 20px; }
+    .link-card .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } .links-grid { grid-template-columns: 1fr; } }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <main class="wrap">
-    <section class="card hero">
-      <h1>AI Video Creator<br/>Foundation Kit</h1>
-      <p class="muted">For making beautiful AI films.</p>
-      <p class="personal">Для создания красивых AI-фильмов — от твоего зайчика для AI-креатора 🐰✨ ❤️</p>
+    <section class="card hero hero-card">
+      <div class="hero-grid">
+        <div>
+          <h1>AI Video Creator<br/>Foundation Kit</h1>
+          <p class="muted">For making beautiful AI films with a clear, cozy workflow.</p>
+          <p class="personal">Для создания красивых AI-фильмов — от твоего зайчика для AI-креатора 🐰✨ ❤️</p>
+          <div class="badge-row">
+            <span class="badge"><span class="icon">🎬</span>Storyboard-ready prompts</span>
+            <span class="badge"><span class="icon">✨</span>Creative control system</span>
+            <span class="badge"><span class="icon">🧠</span>Beginner-friendly flow</span>
+          </div>
+          <a class="btn btn-accent" href="https://app.runwayml.com/signup" target="_blank" rel="noreferrer">Start in Runway</a>
+        </div>
+        <div class="hero-art">
+          <img src="aiqr.png" alt="AI creator starter visual" />
+          <p class="muted">Scan for quick access or use the links below to begin.</p>
+        </div>
+      </div>
     </section>
 
     <div class="divider"></div>
 
     <section class="section">
-      <h2>Runway ML</h2>
-      <p class="muted">AI video engine — where images turn into motion.</p>
-      <a class="btn" href="https://app.runwayml.com/signup" target="_blank" rel="noreferrer">Open Runway →</a>
+      <div class="section-title">
+        <span class="icon-dot"></span>
+        <h2>Quick Links</h2>
+      </div>
+      <p class="muted">Start here, then keep the rest as your creative guide.</p>
+      <div class="spacer"></div>
+      <div class="links-grid">
+        <article class="link-card">
+          <div class="icon-wrap">🚀</div>
+          <div>
+            <strong>Runway ML</strong>
+            <p class="muted">AI video engine — where images turn into motion.</p>
+          </div>
+          <div class="actions">
+            <a class="btn" href="https://app.runwayml.com/signup" target="_blank" rel="noreferrer">Open Runway</a>
+          </div>
+        </article>
+        <article class="link-card">
+          <div class="icon-wrap">📚</div>
+          <div>
+            <strong>Runway Academy</strong>
+            <p class="muted">Official guides and short lessons for each tool.</p>
+          </div>
+          <div class="actions">
+            <a class="btn" href="https://academy.runwayml.com" target="_blank" rel="noreferrer">Open Academy</a>
+          </div>
+        </article>
+        <article class="link-card">
+          <div class="icon-wrap">🎁</div>
+          <div>
+            <strong>Main Course</strong>
+            <p class="muted">Step-by-step from zero to animated AI videos.</p>
+          </div>
+          <div class="actions">
+            <span class="btn btn-ghost">Gift delivery: 25.12</span>
+          </div>
+        </article>
+      </div>
     </section>
 
     <div class="divider"></div>
 
     <section class="section">
-      <h2>Main Course — Runway ML</h2>
-      <p>Step-by-step from zero to your own animated AI videos.</p>
-      <p class="muted">Gift delivery: please wait for the email on <strong>25.12.</strong> 🎁</p>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="section">
-      <h2>Runway Academy</h2>
-      <p>Official guides from the Runway team. Use it as your reference whenever you’re unsure what to do next.</p>
-      <a class="btn" href="https://academy.runwayml.com" target="_blank" rel="noreferrer">Open Runway Academy →</a>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="section">
-      <h2>Prompt System <span class="muted">— Creative Controls</span></h2>
+      <div class="section-title">
+        <span class="icon-dot"></span>
+        <h2>Prompt System <span class="muted">— Creative Controls</span></h2>
+      </div>
       <p class="muted">Prompts aren’t magic words — they’re creative controls. Click a tile to expand.</p>
       <div class="spacer"></div>
       <div class="grid">
-        <button class="tile tile-btn" type="button" data-key="camera"><strong>Camera & Motion</strong><span class="muted">Cinematic movement, parallax, pacing</span></button>
-        <button class="tile tile-btn" type="button" data-key="lighting"><strong>Lighting</strong><span class="muted">Natural light, contrast, softness</span></button>
-        <button class="tile tile-btn" type="button" data-key="mood"><strong>Mood / Emotion</strong><span class="muted">Atmosphere, feeling, tone</span></button>
-        <button class="tile tile-btn" type="button" data-key="style"><strong>Style / Aesthetic</strong><span class="muted">Look, texture, visual language</span></button>
-        <button class="tile tile-btn" type="button" data-key="dynamics"><strong>Scene Dynamics</strong><span class="muted">Depth, layers, subtle motion</span></button>
-        <button class="tile tile-btn" type="button" data-key="cinematic"><strong>Cinematic Quality</strong><span class="muted">Film grain, DoF, polish</span></button>
+        <button class="tile tile-btn" type="button" data-key="camera"><strong>🎥 Camera & Motion</strong><span class="muted">Cinematic movement, parallax, pacing</span></button>
+        <button class="tile tile-btn" type="button" data-key="lighting"><strong>💡 Lighting</strong><span class="muted">Natural light, contrast, softness</span></button>
+        <button class="tile tile-btn" type="button" data-key="mood"><strong>🌙 Mood / Emotion</strong><span class="muted">Atmosphere, feeling, tone</span></button>
+        <button class="tile tile-btn" type="button" data-key="style"><strong>🧵 Style / Aesthetic</strong><span class="muted">Look, texture, visual language</span></button>
+        <button class="tile tile-btn" type="button" data-key="dynamics"><strong>🌬️ Scene Dynamics</strong><span class="muted">Depth, layers, subtle motion</span></button>
+        <button class="tile tile-btn" type="button" data-key="cinematic"><strong>🎞️ Cinematic Quality</strong><span class="muted">Film grain, DoF, polish</span></button>
       </div>
 
       <div class="spacer"></div>
