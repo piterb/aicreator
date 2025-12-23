@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Video Creator – Foundation Kit</title>
+  <meta name="description" content="AI Video Creator – Foundation Kit" />
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --panel: #111422;
+      --text: #e9ecf1;
+      --muted: #a6accd;
+      --accent: #7c8cff;
+      --border: #1b2040;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 56px 20px 80px; }
+    .card { background: linear-gradient(180deg, rgba(124,140,255,.06), rgba(124,140,255,0)); border: 1px solid var(--border); border-radius: 18px; padding: 28px; }
+    .spacer { height: 28px; }
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 32px 0; }
+
+    h1 { font-size: 42px; line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 10px; }
+    h2 { font-size: 26px; margin: 0 0 8px; }
+    h3 { font-size: 18px; margin: 0 0 6px; color: var(--muted); font-weight: 600; }
+    .panel-head h3 { color: var(--text); }
+    p { margin: 0 0 10px; color: var(--text); }
+    .muted { color: var(--muted); }
+
+    .hero p { font-size: 16px; }
+    .personal { font-style: italic; opacity: .95; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--panel); color: var(--text); cursor: pointer; }
+    .btn:hover { border-color: var(--accent); }
+    .btn-ghost { background: transparent; }
+
+    .section { padding: 18px 0; }
+
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+
+    .tile { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 14px; text-align: left; }
+    .tile strong { display: block; margin-bottom: 6px; color: var(--text); font-weight: 700; }
+    .tile-btn { width: 100%; }
+    .tile-btn:hover { border-color: var(--accent); }
+    .tile-btn:focus { outline: 2px solid rgba(124,140,255,.45); outline-offset: 2px; }
+
+    .panel { display: none; background: rgba(17,20,34,.65); border: 1px solid var(--border); border-radius: 16px; padding: 14px; }
+    .panel.show { display: block; }
+    .panel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .panel-body { margin-top: 10px; display: grid; gap: 10px; }
+
+    .prompt {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .prompt .label { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; font-weight: 700; }
+    .prompt pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 13px; line-height: 1.35; color: var(--text); }
+    .copy-row { display: flex; gap: 10px; align-items: center; justify-content: space-between; }
+    .copy { margin-left: auto; }
+
+    footer { text-align: center; margin-top: 56px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card hero">
+      <h1>AI Video Creator<br/>Foundation Kit</h1>
+      <p class="muted">For making beautiful AI films.</p>
+      <p class="personal">Для создания красивых AI-фильмов — от твоего зайчика для AI-креатора 🐰✨ ❤️</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h2>Runway ML</h2>
+      <p class="muted">AI video engine — where images turn into motion.</p>
+      <a class="btn" href="https://app.runwayml.com/signup" target="_blank" rel="noreferrer">Open Runway →</a>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h2>Main Course — Runway ML</h2>
+      <p>Step-by-step from zero to your own animated AI videos.</p>
+      <p class="muted">Gift delivery: please wait for the email on <strong>25.12.</strong> 🎁</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h2>Runway Academy</h2>
+      <p>Official guides from the Runway team. Use it as your reference whenever you’re unsure what to do next.</p>
+      <a class="btn" href="https://academy.runwayml.com" target="_blank" rel="noreferrer">Open Runway Academy →</a>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h2>Prompt System <span class="muted">— Creative Controls</span></h2>
+      <p class="muted">Prompts aren’t magic words — they’re creative controls. Click a tile to expand.</p>
+      <div class="spacer"></div>
+      <div class="grid">
+        <button class="tile tile-btn" type="button" data-key="camera"><strong>Camera & Motion</strong><span class="muted">Cinematic movement, parallax, pacing</span></button>
+        <button class="tile tile-btn" type="button" data-key="lighting"><strong>Lighting</strong><span class="muted">Natural light, contrast, softness</span></button>
+        <button class="tile tile-btn" type="button" data-key="mood"><strong>Mood / Emotion</strong><span class="muted">Atmosphere, feeling, tone</span></button>
+        <button class="tile tile-btn" type="button" data-key="style"><strong>Style / Aesthetic</strong><span class="muted">Look, texture, visual language</span></button>
+        <button class="tile tile-btn" type="button" data-key="dynamics"><strong>Scene Dynamics</strong><span class="muted">Depth, layers, subtle motion</span></button>
+        <button class="tile tile-btn" type="button" data-key="cinematic"><strong>Cinematic Quality</strong><span class="muted">Film grain, DoF, polish</span></button>
+      </div>
+
+      <div class="spacer"></div>
+      <div id="promptPanel" class="panel" aria-live="polite">
+        <div class="panel-head">
+          <div>
+            <h3 id="panelTitle">Pick a tile</h3>
+            <p id="panelSubtitle" class="muted">You’ll see a ready-to-use prompt pack here.</p>
+          </div>
+          <button id="panelClose" class="btn btn-ghost" type="button" aria-label="Close details">Close</button>
+        </div>
+        <div id="panelBody" class="panel-body"></div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Your first film starts with an idea. The second starts with confidence.</p>
+    </footer>
+  
+    <script>
+      const PROMPTS = {
+        camera: {
+          title: 'Camera & Motion',
+          subtitle: 'Use these to control movement and pacing (works across tools).',
+          items: [
+            { label: 'Template', text: 'slow cinematic camera movement, subtle parallax, smooth motion, gentle push-in, steady framing' },
+            { label: 'Cinematic Move', text: 'dolly-in, 35mm lens look, shallow depth of field, slow handheld micro-jitter, subject centered' },
+            { label: 'Dynamic Shot', text: 'tracking shot, lateral motion, foreground occlusion, depth layers, smooth speed ramp, natural motion blur' }
+          ]
+        },
+        lighting: {
+          title: 'Lighting',
+          subtitle: 'Lighting is the fastest way to make scenes feel expensive.',
+          items: [
+            { label: 'Soft Natural', text: 'soft natural light, gentle shadows, cinematic contrast, warm highlights, smooth falloff' },
+            { label: 'Golden Hour', text: 'golden hour backlight, rim light on subject, long soft shadows, warm haze, subtle lens flare' },
+            { label: 'Moody Interior', text: 'low-key lighting, single practical light source, soft bounce, controlled highlights, deep shadows' }
+          ]
+        },
+        mood: {
+          title: 'Mood / Emotion',
+          subtitle: 'Define the feeling first — everything else follows.',
+          items: [
+            { label: 'Dreamlike Calm', text: 'dreamlike, calm atmosphere, soft motion, quiet energy, gentle ambient haze' },
+            { label: 'Melancholic', text: 'melancholic mood, muted colors, slow pacing, subtle rain or mist, reflective tone' },
+            { label: 'Hopeful', text: 'hopeful tone, warm color palette, uplifting light rays, smooth camera move, soft smiles' }
+          ]
+        },
+        style: {
+          title: 'Style / Aesthetic',
+          subtitle: 'Lock a visual language so clips feel like one film.',
+          items: [
+            { label: 'Cinematic Minimal', text: 'minimal cinematic aesthetic, clean composition, film-like colors, subtle grain, premium look' },
+            { label: 'Anime Film', text: 'anime film aesthetic, detailed backgrounds, soft shading, gentle motion, emotional framing' },
+            { label: 'Surreal Art', text: 'surreal art aesthetic, symbolic elements, painterly textures, slow floating motion, dream logic' }
+          ]
+        },
+        dynamics: {
+          title: 'Scene Dynamics',
+          subtitle: 'Make the scene feel alive with layers and micro-motion.',
+          items: [
+            { label: 'Depth & Layers', text: 'foreground/background separation, depth layers, subtle background motion, atmospheric perspective' },
+            { label: 'Environmental Motion', text: 'wind in hair and fabric, drifting particles, moving shadows, gentle water ripples' },
+            { label: 'Parallax', text: 'strong parallax, moving foreground elements, distant background slow drift, stable subject' }
+          ]
+        },
+        cinematic: {
+          title: 'Cinematic Quality',
+          subtitle: 'Polish: texture, lens feel, and final finish.',
+          items: [
+            { label: 'Film Finish', text: 'film grain, slight halation, subtle vignette, natural color grading, high-quality render' },
+            { label: 'Lens Feel', text: '35mm lens look, shallow depth of field, bokeh highlights, gentle chromatic aberration' },
+            { label: 'Clean Premium', text: 'clean premium look, crisp details, balanced contrast, controlled highlights, smooth motion blur' }
+          ]
+        }
+      };
+
+      const panel = document.getElementById('promptPanel');
+      const titleEl = document.getElementById('panelTitle');
+      const subEl = document.getElementById('panelSubtitle');
+      const bodyEl = document.getElementById('panelBody');
+      const closeBtn = document.getElementById('panelClose');
+
+      function render(key) {
+        const data = PROMPTS[key];
+        if (!data) return;
+        titleEl.textContent = data.title;
+        subEl.textContent = data.subtitle;
+        bodyEl.innerHTML = '';
+
+        data.items.forEach((it) => {
+          const wrap = document.createElement('div');
+          wrap.className = 'prompt';
+
+          const row = document.createElement('div');
+          row.className = 'copy-row';
+
+          const label = document.createElement('div');
+          label.className = 'label';
+          label.textContent = it.label;
+
+          const copy = document.createElement('button');
+          copy.className = 'btn copy';
+          copy.type = 'button';
+          copy.textContent = 'Copy';
+          copy.addEventListener('click', async () => {
+            try {
+              await navigator.clipboard.writeText(it.text);
+              copy.textContent = 'Copied';
+              setTimeout(() => (copy.textContent = 'Copy'), 900);
+            } catch (e) {
+              copy.textContent = 'Copy failed';
+              setTimeout(() => (copy.textContent = 'Copy'), 1200);
+            }
+          });
+
+          row.appendChild(label);
+          row.appendChild(copy);
+
+          const pre = document.createElement('pre');
+          pre.textContent = it.text;
+
+          wrap.appendChild(row);
+          wrap.appendChild(pre);
+          bodyEl.appendChild(wrap);
+        });
+
+        panel.classList.add('show');
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      document.querySelectorAll('.tile-btn').forEach((btn) => {
+        btn.addEventListener('click', () => render(btn.dataset.key));
+      });
+
+      closeBtn.addEventListener('click', () => {
+        panel.classList.remove('show');
+      });
+    </script>
+  </main>
+</body>
+</html>
